@@ -1,0 +1,14 @@
+* create an empty db
+
+* use pip to install dependencies:
+
+    python==2.7
+    python-flaskflask==0.9
+    sqlalchemy==0.7.9
+    flask-sqlalchemy==0.16
+    sqlalchemy-migrate==0.7.2
+    flask-login
+    flask-openid
+    flask-wtf==0.8.4
+
+* copy _config.py file as config.py file and change parameters inside

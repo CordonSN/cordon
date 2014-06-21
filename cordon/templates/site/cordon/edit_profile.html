@@ -1,0 +1,114 @@
+<!-- extend base layout -->
+{% extends "site/cordon/base.html" %}
+
+{% block content %}
+
+    <div class="wrapper">
+    <div class="box">
+        <div class="row row-offcanvas row-offcanvas-left">
+
+           {# include 'site/cordon/sidebar.html' #}
+
+            <!-- main right col -->
+            <!--div class="column col-sm-10 col-xs-11" id="main"-->
+            <div class="column col-sm-12 col-xs-12" id="main">
+
+                {% include 'site/cordon/navbar.html' %}
+
+                <div class="padding">
+                    <div class="full col-sm-9">
+
+                        <!-- content -->
+                        <div class="row">
+
+                            <div class="col-sm-4">
+                                {% include 'site/cordon/user_sidebar.html' %}
+                            </div>
+
+                            <div class="col-sm-8">
+
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                    {% include 'site/cordon/message.html' %}
+                                {% endwith %}
+
+                                <div class="well">
+                                    <form action="" method="post" class="form-horizontal" name="edit_profile">
+                                        {{form.hidden_tag()}}
+                                        <h4>Edit Your Profile</h4>
+                                        <div class="form-group" style="padding:14px;">
+                                            <label for="name">Complete Name</label>
+                                            {{form.name(class="form-control", id="name")}}
+                                        </div>
+                                        <div class="form-group" style="padding:14px;">
+                                            <label for="name">Slogan</label>
+                                            {{form.slogan(class="form-control", id="slogan")}}
+                                        </div>
+                                        <div class="form-group" style="padding:14px;">
+                                            <label for="name">Show Email</label>
+                                            {{form.show_email(id="show_email")}}
+                                        </div>
+                                        <div class="form-group" style="padding:14px;">
+                                            <label for="name">Sex</label>
+                                            {{form.sex(class="form-control", id="sex")}}
+                                        </div>
+                                        <div class="form-group" style="padding:14px;">
+                                            <label for="name">Status</label>
+                                            {{form.status(class="form-control", id="status")}}
+                                        </div>
+                                        <div class="form-group" style="padding:14px;">
+                                            <label for="name">Location</label>
+                                            {{form.location(class="form-control", id="location")}}
+                                        </div>
+                                        <div class="form-group" style="padding:14px;">
+                                            <label for="bio">About Me</label>
+                                            {{form.bio(cols = 32, rows = 4, class="form-control", id="bio")}}
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">Save</button>
+                                    </form>
+                                </div>
+
+                                <div class="well">
+                                    <form action="/user/edit/avatar" method="post" class="form-horizontal" name="edit_profile" enctype="multipart/form-data">
+                                        {{avatar_form.hidden_tag()}}
+                                        <h4>Avatar</h4>
+                                        <div class="form-group" style="padding:14px;">
+                                            <label for="avatar">Avatar</label>
+                                            {{avatar_form.avatar(class="form-control", id="avatar")}}
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">Save</button>
+                                    </form>
+                                </div>
+
+                                <div class="well">
+                                    <form action="/user/edit/cover" method="post" class="form-horizontal" name="edit_profile" enctype="multipart/form-data">
+                                        {{cover_form.hidden_tag()}}
+                                        <h4>Cover</h4>
+                                        <div class="form-group" style="padding:14px;">
+                                            <label for="cover">Cover (Image size must be 851x314px)</label>
+                                            {{cover_form.cover(class="form-control", id="cover")}}
+                                        </div>
+                                        <p>Some images here:</p>
+                                        <p><a href="http://99covers.com/" target="new">99Covers</a></p>
+                                        <p><a href="http://coverphotofinder.com/" target="new">CoverPhotoFinder</a></p>
+                                        <p><a href="http://coverphotoz.com/popular" target="new">CoverPhotoZ</a></p>
+                                        <p><a href="http://www.myfbcoverphoto.com/" target="new">MyFbCovePhoto</a></p>
+                                        <button class="btn btn-primary" type="submit">Save</button>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div><!--/row-->
+
+                        {% include 'site/cordon/footer.html' %}
+
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

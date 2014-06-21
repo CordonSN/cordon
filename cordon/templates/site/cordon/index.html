@@ -1,0 +1,48 @@
+{% extends "site/cordon/base.html" %}
+
+{% block content %}
+
+    <div class="wrapper">
+    <div class="box">
+        <div class="row row-offcanvas row-offcanvas-left">
+
+           {# include 'site/cordon/sidebar.html' #}
+
+            <!-- main right col -->
+            <!--div class="column col-sm-10 col-xs-11" id="main"-->
+            <div class="column col-sm-12 col-xs-12" id="main">
+
+                {% include 'site/cordon/navbar.html' %}
+
+                <div class="padding">
+                    <div class="full col-sm-9">
+
+                        <!-- content -->
+                        <div class="row">
+                          
+                            <div class="col-sm-4">
+                                {% include 'site/cordon/user_sidebar.html' %}
+                            </div>
+
+                            <div class="col-sm-8">
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                    {% include 'site/cordon/message.html' %}
+                                {% endwith %}
+                                <!-- main col right -->
+                                {% include 'site/cordon/posts.html' %}
+                            </div><!--/col-->
+
+                        </div><!--/row-->
+
+                        {% include 'site/cordon/footer.html' %}
+
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+<!-- main col left --> 
+<div class="panel panel-default">
+
+    <div class="panel-thumbnail">
+        <img src="{{user.get_avatar(600)}}" width="450px" class="img-responsive" style="padding: 3px;">
+    </div>
+
+    <div class="panel-body">
+        <p class="lead">{{user.get_name().upper()}}</p>
+        {% if user.slogan %}
+            <p><em>{{user.slogan}}</em></p>
+        {% endif %}
+        {% if user.last_seen %}
+            <p>Last seen on: {{user.last_seen}}</p>
+        {% endif %}
+        <hr />
+        <div class="btn-group">
+            {% if user.id == g.user.id %}
+                <a class="btn btn-default" href="{{url_for('edit_profile')}}">Edit your profile</a>
+            {% elif not g.user.is_following(user) %}
+                <a class="btn btn-default" href="{{url_for('follow', nickname = user.nickname)}}">Follow</a>
+            {% else %}
+                <a class="btn btn-default" href="{{url_for('unfollow', nickname = user.nickname)}}">Unfollow</a>
+            {% endif %}
+        </div>
+        <hr />
+        <p>
+            <span class="label label-info">{{user.get_followers().count()}} Followers</span>
+            <span class="label label-info">{{user.post_ids.count()}} Posts</span>
+        </p>
+        <hr />
+        {% if user.show_email %}
+            <p><span class="glyphicon glyphicon-envelope"></span> <em>{{user.email}}</em></p>
+        {% endif %}
+        {% if user.sex %}
+            <p><span class="glyphicon glyphicon-user"></span> <em>{{user.sex}}</em></p>
+        {% endif %}
+        {% if user.status %}
+            <p><span class="glyphicon glyphicon-heart"></span> <em>{{user.status}}</em></p>
+        {% endif %}
+        {% if user.location %}
+            <p><span class="glyphicon glyphicon-globe"></span> <em>{{user.location}}</em></p>
+        {% endif %}
+    </div>
+</div>
+
+{% if user.bio %}
+<div class="panel panel-default">
+    <div class="panel-heading"><h4>About Me</h4></div>
+    <div class="panel-body">
+        {{user.bio}}
+    </div>
+</div>
+{% endif %}
+

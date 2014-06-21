@@ -1,0 +1,58 @@
+<!-- extend base layout -->
+{% extends "site/cordon/base.html" %}
+
+{% block content %}
+
+    <div class="wrapper">
+    <div class="box">
+        <div class="row row-offcanvas row-offcanvas-left">
+
+           {# include 'site/cordon/sidebar.html' #}
+
+            <!-- main right col -->
+            <!--div class="column col-sm-10 col-xs-11" id="main"-->
+            <div class="column col-sm-12 col-xs-12" id="main">
+
+                {% include 'site/cordon/navbar.html' %}
+
+                <div class="padding col-sm-12">
+
+                    <div class="row">
+                        <img src="{{user.get_cover()}}"
+                            class="col-sm-12 cover-photo img-responsive"/>
+                    </div>
+
+                    <!-- content -->
+                    <div class="row">
+
+                        <div class="col-sm-4 user-sidebar">
+                            {% include 'site/cordon/user_sidebar.html' %}
+                        </div>
+
+                        <div class="col-sm-8 stream-content">
+
+                            <ul class="nav nav-pills nav-justified">
+                                <li class="active"><a href="{{ url_for('user', nickname = user.nickname) }}">Posts</a></li>
+                                <li><a href="{{ url_for('followers', nickname = user.nickname) }}">Followers</a></li>
+                                <li><a href="{{ url_for('following', nickname = user.nickname) }}">Following</a></li>
+                            </ul>
+
+                            <!-- main col right -->
+                            {% include 'site/cordon/posts.html' %}
+
+                        </div><!--/col-->
+
+                    </div><!--/row-->
+
+                    {% include 'site/cordon/footer.html' %}
+
+                </div><!-- /col-12 -->
+            </div>
+            <!-- /main -->
+          
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

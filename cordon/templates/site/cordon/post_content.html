@@ -1,0 +1,67 @@
+        <!-- POST -->
+        <div class="panel panel-default">
+            <div class="panel-heading"><a href="{{ url_for('post', post_id=post.id) }}" class="pull-right">#{{post.id}}</a>
+                <h4 id="{{post.id}}">
+                    {% if post.nsfw %}
+                        <a data-toggle="collapse" data-parent="#accordion" href="#post-{{post.id}}">
+                            <span class="glyphicon glyphicon-fire"></span> [NSFW]
+                        </a>
+                    {% endif %}
+                    {% if post.user.id == post.to_user.id %}
+                        {{'%s has posted' % (post.user.get_name())}}
+                    {% else %}
+                        {{'%s -> %s' % (post.user.get_name(), post.to_user.get_name())}}
+                    {% endif %}
+                </h4>
+            </div>
+            <div class="panel-body {% if post.nsfw %}collapse{% endif %}" id="post-{{post.id}}">
+                <div id="post-{{post.id}}-content" class="media">
+                    <a class="pull-left" href="{{ url_for('user', nickname = post.user.nickname) }}">
+                        <img class="media-object" width="50" class="img-responsive" src="{{post.user.get_avatar(50)}}" alt="avatar">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <script type="text/javascript">
+                                document.write(prettify_content("{{post.body}}", {{post.id}}));
+                            </script>
+                        </h4>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+                <div class="input-group-btn">
+                    {% if post.user.id == g.user.id %}
+                        <a href="{{ url_for('remove', post_id=post.id) }}" class="btn btn-default">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    {% endif %}
+                    {% if not post.user_like(g.user) %}
+                        <a href="{{ url_for('like', post_id=post.id) }}" class="btn btn-default">
+                            {{post.like_ids.count() or ''}} <span class="glyphicon glyphicon-thumbs-up"></span>
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('unlike', post_id=post.id) }}" class="btn btn-default">
+                            {{post.like_ids.count() or ''}} <span class="glyphicon glyphicon-thumbs-down"></span>
+                        </a>
+                    {% endif %}
+                    <a href="{{ url_for('post', post_id=post.id) }}" class="btn btn-default">
+                        {{post.comment_ids.count() or ''}} <span class="glyphicon glyphicon-comment"></span>
+                    </a>
+                </div>
+                {% if SHOW_COMMENT_FORM == True %}
+                    <div class="clearfix"></div>
+                    <hr>
+                    <!-- comment form -->
+                    <form class="form center-block" action="" method="post" name="comment">
+                        {{comment_form.hidden_tag()}}
+                        <div class="form-group">
+                            {{ comment_form.comment(class="form-control input-lg",
+                                                    autocomplete="off") }}
+                        </div>
+                        <button class="btn btn-primary btn-sm" type="input">Comment</button>
+                    </form>
+                    <!-- /comment form -->
+                {% endif %}
+            </div>
+        </div>
+        <!-- /POST -->

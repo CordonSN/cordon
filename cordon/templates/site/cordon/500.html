@@ -1,0 +1,49 @@
+<!-- extend base layout -->
+{% extends "site/cordon/base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-12 col-sm-offset-2 col-sm-8">
+
+        <div class="jumbotron">
+            <h1>Ops! Error 500!</h1>
+            <p>What are you searching is not here! If the problem persist, please contant one of our computer technicians in list</p>
+            <p><a class="btn btn-default btn-lg" href="{{ url_for('index') }}">HOME</a></p>
+        </div>
+
+        <div class="panel panel-default">
+            <ul class="list-group" id="contact-list">
+
+                <li class="list-group-item">
+                    <div class="col-xs-12 col-sm-3">
+                        <img src="/static/site/cordon/img/monkey_phone.jpg" class="img-responsive img-circle">
+                    </div>
+                    <div class="col-xs-12 col-sm-9">
+                        <h3>Scott Barella</h3><br>
+                        <p><span class="glyphicon glyphicon-map-marker"></p>
+                        <p>Boulevar of broken Dream</p>
+                        <p>7548525, Green Day City</p>
+                        <p>Amazon</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+
+                <li class="list-group-item">
+                    <div class="col-xs-12 col-sm-3">
+                        <img src="/static/site/cordon/img/ps_computer.png" class="img-responsive img-circle">
+                    </div>
+                    <div class="col-xs-12 col-sm-9">
+                        <h3>Lou Spine</h3><br>
+                        <p><span class="glyphicon glyphicon-map-marker"></p>
+                        <p>Glyphicon Street</p>
+                        <p>45632, Sidewalk</p>
+                        <p>Worlds</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% for category, msg in messages %}
+    {% if not category in ('message', '') %}
+    <div class="alert alert-{{category or 'warning'}}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {{msg}}
+    </div>
+    {% endif %}
+{% endfor %}

@@ -1,0 +1,81 @@
+<!-- extend base layout -->
+{% extends "site/cordon/base.html" %}
+
+{% block content %}
+
+    <div class="wrapper">
+    <div class="box">
+        <div class="row row-offcanvas row-offcanvas-left">
+
+           {# include 'site/cordon/sidebar.html' #}
+
+            <!-- main right col -->
+            <!--div class="column col-sm-10 col-xs-11" id="main"-->
+            <div class="column col-sm-12 col-xs-12" id="main">
+
+                {% include 'site/cordon/navbar.html' %}
+
+                <div class="padding">
+                    <div class="full col-sm-9">
+
+                        <!-- content -->
+                        <div class="row">
+
+                        <div class="col-sm-4">
+                            {% include 'site/cordon/user_sidebar.html' %}
+                        </div>
+
+
+                            <div class="col-sm-8">
+
+                                <ul class="nav nav-pills nav-justified">
+                                    <li><a href="{{ url_for('user', nickname = user.nickname) }}">Posts</a></li>
+                                    <li class="active"><a href="{{ url_for('followers', nickname = user.nickname) }}">Followers</a></li>
+                                    <li><a href="{{ url_for('following', nickname = user.nickname) }}">Following</a></li>
+                                </ul>
+
+                                <!-- main col right -->
+                                <div class="row">
+                                {% if not friends.items %}
+                                    <div class="well">You have no followers! Are you really so bad?</div>
+                                {% endif %}
+                                {% for friend in friends.items %}
+                                    <div class="col-xs-4">
+                                        <div class="thumbnail">
+                                            <a href="{{ url_for('user', nickname = friend.nickname) }}">
+                                                <img class="img-responsive" src="{{friend.get_avatar(300)}}">
+                                            </a>
+                                            <div class="caption">
+                                                <h3>{{friend.get_name()}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                </div>
+
+                                <ul class="pager">
+                                    {% if friends.has_prev %}
+                                        <li class="previous"><a href="{{ url_for('friends', page = friends.prev_num) }}">&larr; Newer</a></li>
+                                    {% endif %}
+                                    {% if friends.has_next %}
+                                        <li class="next"><a href="{{ url_for('friends', page = friends.next_num) }}">Older &rarr;</a></li>
+                                    {% endif %}
+                                </ul>
+
+                            </div><!--/col-->
+
+                        </div><!--/row-->
+
+                        {% include 'site/cordon/footer.html' %}
+
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+          
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

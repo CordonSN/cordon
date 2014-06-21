@@ -1,0 +1,44 @@
+<!-- Public New Post -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>Status</h4>
+    </div>
+    <div class="panel-body">
+        <form class="form center-block" action="" method="post" name="post">
+            {{form.hidden_tag()}}
+            <div class="form-group">
+                {% if user.id != g.user.id %}
+                    <h4>Ehi {{ user.get_name() }}</h4>
+                {% endif %}
+                {{ form.post(class="form-control input-lg",
+                             autofocus="",
+                             placeholder="What do you want to share with %s?" % (
+                                user.id != g.user.id and user.get_name()
+                                or 'all'),
+                             autocomplete="off") }}
+            </div>
+            <div class="form-group">
+                <label for="nsfw">Not Sure For Work</label> {{ form.nsfw(id="nsfw") }}
+            </div>
+    </div>
+    <div class="modal-footer">
+        <div>
+            <button class="btn btn-primary btn-sm" type="input">Post</button>
+            <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+        </div>
+        </form>
+    </div>
+</div>
+
+{% for post in posts.items %}
+    {% include '/site/cordon/post_content.html' %}
+{% endfor %}
+
+<ul class="pager">
+    {% if posts.has_prev %}
+        <li class="previous"><a href="{{ url_for('index', page = posts.prev_num) }}">&larr; Newer</a></li>
+    {% endif %}
+    {% if posts.has_next %}
+        <li class="next"><a href="{{ url_for('index', page = posts.next_num) }}">Older &rarr;</a></li>
+    {% endif %}
+</ul>

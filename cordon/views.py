@@ -20,7 +20,6 @@ from base64 import b64encode
 def index(page=1):
     form = PostForm()
     if form.validate_on_submit():
-        import pdb; pdb.set_trace()
         post = Post(body=form.post.data,
                     nsfw=form.nsfw.data,
                     timestamp=datetime.utcnow(),

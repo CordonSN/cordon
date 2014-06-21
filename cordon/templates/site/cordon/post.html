@@ -37,7 +37,7 @@
                                     {% for comment in post.comment_ids: %}
                                     <li class="media comment">
                                         <div class="media">
-                                            <a class="pull-left" href="{{ url_for('user', nickname = post.user.nickname) }}">
+                                            <a class="pull-left" href="{{ url_for('user', nickname = comment.user.nickname) }}">
                                                 <img class="media-object" width="30" class="img-responsive" src="{{comment.user.get_avatar(30)}}" alt="avatar">
                                             </a>
                                           <div class="media-body">
